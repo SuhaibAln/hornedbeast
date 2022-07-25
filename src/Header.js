@@ -3,7 +3,7 @@ class Header extends React.Component{
 render(){
 return(
 
-  <div>
+  <div className="Header" >
 <h1>Hello world From React</h1>
 
   </div>

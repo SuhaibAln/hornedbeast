@@ -1,27 +1,32 @@
 import React from "react";
-import Main from "./Main";
-class hornedbeast extends React.Component{
-render(){
-return(
+class HornedBeast extends React.Component {
 
-  <div className="hornedbest" title={this.props=title}>
-      <>
+    constructor(props) {
+        super(props);
+        this.state = {
+            votes: 0
+        }
+    }
 
-        
-<h2>{this.props.title}</h2>
-<img alt={this.props.keyword} src={this.props.image_url} title={this.props.title}></img>
-            <p>{this.props.description}</p>
+    handleClick = () => {
+        this.setState({votes: this.state.votes + 1})
+      }
 
 
+    render() {
+        return (
+            <div>
 
-      </>
-  </div>
-)
-  
+                <h2 className="Title">{this.props.title}</h2>
 
+                <img className="Img" src={this.props.imgurl} alt={this.props.img} title={this.props.imgTitle} onClick={this.handleClick}/>
+
+                <p> {this.props.description},  ❤{this.state.Counter} Horns: {this.props.horns}</p>
+
+            </div>
+
+        )
+    }
 }
 
-}
-
-
-export default hornedbeast;
+export default HornedBeast
