@@ -1,32 +1,53 @@
-import React from "react";
-class HornedBeast extends React.Component {
+import { Component } from "react";
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            votes: 0
-        }
+//https://react-bootstrap.github.io/components/cards/
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+
+class HornedBeast extends Component{
+    constructor(){
+        super();
+        this.state = {favorited: 0};
     }
 
-    handleClick = () => {
-        this.setState({votes: this.state.votes + 1})
-      }
+    handleClick = (e) => {
+        this.setState({favorited: this.state.favorited + 1});
+    }
 
+    handlePicClick = (e) => {
+        this.props.handlePicClick(this);
+    }
 
-    render() {
-        return (
-            <div>
-
-                <h2 className="Title">{this.props.title}</h2>
-
-                <img className="Img" src={this.props.imgurl} alt={this.props.img} title={this.props.imgTitle} onClick={this.handleClick}/>
-
-                <p> {this.props.description},  ❤{this.state.Counter} Horns: {this.props.horns}</p>
-
-            </div>
-
-        )
+    render(){
+        return(
+            //wrapping in an anchor to make whole card clickable: https://stackoverflow.com/questions/53973644/making-whole-card-clickable-in-reactstrap
+            <Card className="horned-beast" style={{height: '100%'}}>
+                {/*Changed to <img> dom element instead of Card.Image so can use onClick without generating warning*/}
+                <img src={this.props.image_url} alt={this.props.title} onClick={this.handlePicClick}></img>
+                <Card.Body>
+                    
+                    <Card.Title>{this.props.title}</Card.Title>
+                    <Card.Text>
+                        {this.props.description}                           
+                    </Card.Text>
+                    <Card.Text>
+                    ❤: {this.state.favorited}                         
+                    </Card.Text>
+                    
+                    <Button 
+                        variant="primary" 
+                        size="lg" 
+                        style={{width: "100%"}}
+                        onClick= {this.handleClick}
+                        >
+                            Vote Favorite
+                    </Button>
+                </Card.Body>
+            </Card>
+            
+            
+        );
     }
 }
 
-export default HornedBeast
+export default HornedBeast;
